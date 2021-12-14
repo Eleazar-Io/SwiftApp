@@ -4,10 +4,13 @@ import {GET_BANNER_SLIDER} from '@app/services/queries/banner';
 import {withProfiler} from '@sentry/react-native';
 import {modules} from '@root/swift.config';
 import {navigateTo} from '@app/helpers/Navigation';
+import { GET_POPULAR } from './services/schema';
 
 import Views from '@app/_modules/popular/_view';
 
 const PopularController = props => {
+
+    
     if (!modules.popular.enable) {
       return null;
     }
@@ -18,6 +21,9 @@ const PopularController = props => {
      * @return {object}
      * ---------------------------------------------------- *
      */
+
+    const {loading, error, data} = useQuery(GET_POPULAR)
+
     const [bannerSlider, setBannerSlider] = useState([]);
     const {data: bannerSliderData} = useQuery(GET_BANNER_SLIDER);
   
@@ -41,6 +47,9 @@ const PopularController = props => {
   
     const controllerProps = {
       bannerSlider,
+      loading,
+      error,
+      data
     };
   
     return <Views {...props} {...controllerProps} />;

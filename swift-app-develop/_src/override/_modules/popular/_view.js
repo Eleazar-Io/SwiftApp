@@ -8,8 +8,8 @@ import { useQuery } from '@apollo/client'
 import styles from './style'
 import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
 
-const Popular = ()=> {
-    const {loading, error, data} = useQuery(GET_POPULAR)
+const Popular = ({loading, error, data})=> {
+   
     console.log(data)
     if(loading||error) return <></>
     if(data)
